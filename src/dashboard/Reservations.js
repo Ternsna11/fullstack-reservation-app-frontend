@@ -29,7 +29,6 @@ function Reservations({onCancel, reservations = [] }) {
               <div className="col-sm-1">
                 <Link className="btn btn-info m-1" to={`/reservations/${reservation.reservation_id}/seat`}>seat</Link>
                 <Link className="btn btn-success m-1" to={`/reservations/${reservation.reservation_id}/edit`}>edit</Link>
-                {/* <Link className="btn btn-danger" to={`/reservations/${reservation.reservation_id}/cancel`}>cancel</Link> */}
                 <button type="button" className="btn btn-danger m-1" data-reservation-id-cancel={reservation.reservation_id} onClick={cancelHandler}>Cancel</button>
               </div>
           ) : ( "" )}
