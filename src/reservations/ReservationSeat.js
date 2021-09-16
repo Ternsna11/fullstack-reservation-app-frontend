@@ -15,9 +15,8 @@ function ReservationSeat() {
   }, []);
 
   useEffect(() => {
-      readReservation(reservation_id)
-      .then(setReservation);
-   }, [reservation_id]);
+    readReservation(reservation_id).then(setReservation);
+  }, [reservation_id]);
 
   function changeHandler({ target: { value } }) {
     setTableId(value);
@@ -26,18 +25,25 @@ function ReservationSeat() {
   function submitHandler(event) {
     event.preventDefault();
     event.stopPropagation();
-    seatReservation(reservation.reservation_id, tableId)
-      .then(() => history.push("/dashboard"));
+    seatReservation(reservation.reservation_id, tableId).then(() =>
+      history.push("/dashboard")
+    );
   }
 
   return (
-    <main>
-      <h1>Seat</h1>
+    <main className="">
+      <h1>SEAT</h1>
       <form onSubmit={submitHandler}>
         <fieldset>
           <div className="row ">
             <div className="col">
-              <select id="table_id" name="table_id" value={tableId} required={true} onChange={changeHandler}>
+              <select
+                id="table_id"
+                name="table_id"
+                value={tableId}
+                required={true}
+                onChange={changeHandler}
+              >
                 <option value="">Table</option>
                 {tables.map((table) => (
                   <option key={table.table_id} value={table.table_id}>
@@ -47,8 +53,15 @@ function ReservationSeat() {
               </select>
             </div>
           </div>
-          <button type="button" className="btn" onClick={() => history.goBack()}>Cancel</button>
-          <button type="submit" className="btn">Submit</button>
+          <button
+            className="btn btn-danger mt-1 mr-2"
+            onClick={() => history.goBack()}
+          >
+            Cancel
+          </button>
+          <button type="submit" className="btn btn-success mt-1">
+            Submit
+          </button>
         </fieldset>
       </form>
     </main>
