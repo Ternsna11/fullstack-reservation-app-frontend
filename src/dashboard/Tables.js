@@ -18,7 +18,11 @@ function Tables({ onFinish, tables = [] }) {
   const rows = tables.length ? (
     tables.map((table) => {
       return (
-        <div className="form-group row card m-3 p-2 align-items-center bg-light"style={{ width: "20rem" }}key={table.table_id}  >
+        <div
+          className="form-group row card m-3 p-2 align-items-center bg-light"
+          style={{ width: "20rem" }}
+          key={table.table_id}
+        >
           <div> Table:{table.table_name}</div>
           <div>Capacity:{table.capacity}</div>
           <div
@@ -49,14 +53,16 @@ function Tables({ onFinish, tables = [] }) {
   ) : (
     <div>No results</div>
   );
-  return <div className="table d-flex justify-content-center flex-wrap">{rows}</div>;
+  return (
+    <div className="table d-flex justify-content-center flex-wrap">{rows}</div>
+  );
 }
 
 export default Tables;
 
-
 /// carters styling
-{/* <div className="card m-3 bg-light" style={{ width: "10rem" }}>
+{
+  /* <div className="card m-3 bg-light" style={{ width: "10rem" }}>
         <div className="card-body">
           <h5 className="card-title">Table {table.table_name}</h5>
           <h6 className="card-subtitle mb-2 text-muted">
@@ -78,4 +84,5 @@ export default Tables;
             ""
           )}
         </div>
-      </div> */}
+      </div> */
+}
