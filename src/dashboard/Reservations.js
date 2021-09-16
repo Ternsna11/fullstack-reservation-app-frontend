@@ -17,18 +17,18 @@ function Reservations({onCancel, reservations = [] }) {
   const rows = reservations.length ? (
     reservations.map((reservation) => {
       return (
-        <div className="form-group row card m-3 bg-light d-flex justify-content-between" key={reservation.reservation_id}>
-          <div className="col-sm-1">{reservation.reservation_id}</div>
-          <div className="col-sm-1">{reservation.first_name}, {reservation.last_name}</div>
-          <div className="col-sm-1">{reservation.mobile_number}</div>
-          <div className="col-sm-1">{reservation.reservation_date}</div>
-          <div className="col-sm-1">{reservation.reservation_time}</div>
-          <div className="col-sm-1">{reservation.people}</div>
-          <div className="col-sm-1" data-reservation-id-status={reservation.reservation_id}>{reservation.status}</div>
+        <div className="form-group row card m-3 p-2 align-items-center bg-light d-flex " style={{ width: "18rem" }} key={reservation.reservation_id}>
+          <div>Reservation ID: {reservation.reservation_id}</div>
+          <div>{reservation.first_name},  {reservation.last_name}</div>
+          <div>Phone#: {reservation.mobile_number}</div>
+          <div>{reservation.reservation_date}</div>
+          <div>{reservation.reservation_time}</div>
+          <div>{reservation.people}</div>
+          <div data-reservation-id-status={reservation.reservation_id}>{reservation.status}</div>
           {reservation.status === "booked" ? (
-              <div className="col-sm-1">
-                <Link className="btn btn-info m-1" to={`/reservations/${reservation.reservation_id}/seat`}>seat</Link>
-                <Link className="btn btn-success m-1" to={`/reservations/${reservation.reservation_id}/edit`}>edit</Link>
+              <div>
+                <Link className="btn btn-info m-1" to={`/reservations/${reservation.reservation_id}/seat`}>Seat</Link>
+                <Link className="btn btn-success m-1" to={`/reservations/${reservation.reservation_id}/edit`}>Edit</Link>
                 <button type="button" className="btn btn-danger m-1" data-reservation-id-cancel={reservation.reservation_id} onClick={cancelHandler}>Cancel</button>
               </div>
           ) : ( "" )}
@@ -39,7 +39,7 @@ function Reservations({onCancel, reservations = [] }) {
     <div>No reservations found</div>
   );
   return (
-      <div className="table">
+      <div className="table d-flex justify-content-center">
       {rows}
       </div>
   )

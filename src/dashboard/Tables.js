@@ -18,17 +18,17 @@ function Tables({ onFinish, tables = [] }) {
   const rows = tables.length ? (
     tables.map((table) => {
       return (
-        <div className="form-group row card m-3 bg-light"style={{ width: "auto" }}key={table.table_id}  >
-          <div className="col-sm-1"> Table:{table.table_name}</div>
-          <div className="col-sm-1">Capacity:{table.capacity}</div>
+        <div className="form-group row card m-3 p-2 align-items-center bg-light"style={{ width: "20rem" }}key={table.table_id}  >
+          <div> Table:{table.table_name}</div>
+          <div>Capacity:{table.capacity}</div>
           <div
-            className="col-sm-1 btn btn-outline-success  mb-2"
+            className=" btn btn-outline-success  mb-2"
             data-table-id-status={table.table_id}
             mb-5
           >
             {table.reservation_id ? "Occupied" : "Free"}
           </div>
-          <div className="col-sm-1">
+          <div>
             {table.reservation_id ? (
               <button
                 type="button"
@@ -49,7 +49,7 @@ function Tables({ onFinish, tables = [] }) {
   ) : (
     <div>No results</div>
   );
-  return <div className="table">{rows}</div>;
+  return <div className="table d-flex justify-content-center flex-wrap">{rows}</div>;
 }
 
 export default Tables;

@@ -26,10 +26,11 @@ function Search() {
 
   return (
     <main>
-      <h1>Search reservations</h1>
+      <div className= "SearchForm d-flex flex-column flex-wrap align-items-center">
+      <h1>SEARCH RESERVATIONS</h1>
       <form onSubmit={submitHandler}>
           <div className="row">
-            <div className="form-group col-md-4 col-sm-12">
+            <div className="form-group .">
               <label htmlFor="mobile_number">Mobile Number:</label>
               <div className="input-group">
                 <input type="text" id="mobile_number" name="mobile_number" className="form-control" value={mobileNumber} onChange={changeHandler}/>
@@ -39,7 +40,8 @@ function Search() {
               </div>
             </div>
           </div>
-      </form>
+        </form>
+      </div>
       {showResults && (
         <Reservations reservations={reservations} />
       )}
@@ -48,3 +50,4 @@ function Search() {
 }
 
 export default Search;
+// div classname form-group styling col-md-4 col-sm-12

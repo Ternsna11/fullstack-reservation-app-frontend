@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { listReservations, listTables, finishTable, cancelReservation } from "../utils/api";
+import {
+  listReservations,
+  listTables,
+  finishTable,
+  cancelReservation,
+} from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import Reservations from "./Reservations";
 import Tables from "./Tables";
@@ -44,45 +49,51 @@ function Dashboard() {
 
   return (
     <main>
-      <h1>Dashboard</h1>
-      <h1 className="m-3">{formatDate(date)}</h1>
-      <button
-        onClick={() => setDate(previous(date))}
-        className="btn btn-sm btn-light"
-      >
-        Previous Day
-      </button>
-      <button
-        className="mx-3 btn btn-sm btn-light"
-        onClick={() => setDate(today())}
-      >
-        Today
-      </button>
-      <button
-        onClick={() => setDate(next(date))}
-        className="btn btn-sm btn-light"
-      >
-        Next Day
-      </button>
-      <br />
-      <label htmlFor="reservation_date" className="form-label m-3">
-        <input
-          type="date"
-          pattern="\\d{4}-\\d{2}-\\d{2}"
-          name="reservation_date"
-          onChange={handleDateChange}
-          value={date}
-        />
-      </label>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0 text-primary">Reservations</h4>
+      <div className="Dashboard-Dates text-center">
+        <h1>Dashboard</h1>
+        <h1 className="m-3">{formatDate(date)}</h1>
+        <button
+          onClick={() => setDate(previous(date))}
+          className="btn btn-sm btn-light"
+        >
+          Previous Day
+        </button>
+        <button
+          className="mx-3 btn btn-sm btn-light"
+          onClick={() => setDate(today())}
+        >
+          Today
+        </button>
+        <button
+          onClick={() => setDate(next(date))}
+          className="btn btn-sm btn-light"
+        >
+          Next Day
+        </button>
+        <br />
+        <label htmlFor="reservation_date" className="form-label m-3">
+          <input
+            type="date"
+            pattern="\\d{4}-\\d{2}-\\d{2}"
+            name="reservation_date"
+            onChange={handleDateChange}
+            value={date}
+          />
+        </label>
+      </div>
+      <div className="mb-3 text-center">
+        <h4 className="mb-0 text-primary">RESERVATIONS</h4>
       </div>
       <ErrorAlert error={reservationsError} />
-      <Reservations reservations={reservations} onCancel={onCancel} />
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Tables</h4>
+      <div>
+        <Reservations reservations={reservations} onCancel={onCancel} />
       </div>
-      <Tables onFinish={onFinish} tables={tables} />
+      <div className="mb-3 text-center">
+        <h4 className="mb-0">TABLES</h4>
+      </div>
+      <div>
+        <Tables onFinish={onFinish} tables={tables} />
+      </div>
     </main>
   );
 }
