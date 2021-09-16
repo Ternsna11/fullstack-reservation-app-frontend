@@ -80,7 +80,7 @@ function ReservationForm(){
 
         const reservationErrors = validate(reservation);
 
-        console.log(reservationErrors);
+        
         if (reservationErrors.length) {
           return setError(reservationErrors);
         }
