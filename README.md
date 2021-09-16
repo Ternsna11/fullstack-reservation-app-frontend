@@ -10,7 +10,7 @@ A Restaurant Reservation System that is used to keep track of guest reservations
 
 ### The Dashboard
 
-![Image of Dashboard](./images/RestaurantReservationsDashboard.png)
+![Image of Dashboard](./images/RestaurantReservationDashboard.png)
 
 ### Create new Reservation
 
@@ -20,7 +20,7 @@ A Restaurant Reservation System that is used to keep track of guest reservations
 
 ![Image of New Table](./images/NewTableForm.png)
 
-### Searh for Reservation
+### Search for Reservation
 
 ![Image of Reservation Search](./images/ReservationSearch.png)
 
