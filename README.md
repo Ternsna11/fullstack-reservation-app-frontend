@@ -12,6 +12,10 @@ A Restaurant Reservation System that is used to keep track of guest reservations
 
 ![Image of Dashboard](./images/RestaurantReservationDashboard.png)
 
+### The Dashboard With Reservations
+
+![Image of Dashboard](./images/RestaurantDashboardWithReservations.png)
+
 ### Create new Reservation
 
 ![Image of New Reservation](./images/NewReservationForm.png)
