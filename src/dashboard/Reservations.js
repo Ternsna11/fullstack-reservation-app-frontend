@@ -17,7 +17,7 @@ function Reservations({onCancel, reservations = [] }) {
   const rows = reservations.length ? (
     reservations.map((reservation) => {
       return (
-        <div className="form-group row" key={reservation.reservation_id}>
+        <div className="form-group row card m-3 bg-light d-flex justify-content-between" key={reservation.reservation_id}>
           <div className="col-sm-1">{reservation.reservation_id}</div>
           <div className="col-sm-1">{reservation.first_name}, {reservation.last_name}</div>
           <div className="col-sm-1">{reservation.mobile_number}</div>

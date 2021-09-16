@@ -18,12 +18,13 @@ function Tables({ onFinish, tables = [] }) {
   const rows = tables.length ? (
     tables.map((table) => {
       return (
-        <div className="form-group row card m-3 bg-light" key={table.table_id}>
-          <div className="col-sm-1">{table.table_name}</div>
-          <div className="col-sm-1">{table.capacity}</div>
+        <div className="form-group row card m-3 bg-light"style={{ width: "auto" }}key={table.table_id}  >
+          <div className="col-sm-1"> Table:{table.table_name}</div>
+          <div className="col-sm-1">Capacity:{table.capacity}</div>
           <div
-            className="col-sm-1 btn btn-outline-success"
+            className="col-sm-1 btn btn-outline-success  mb-2"
             data-table-id-status={table.table_id}
+            mb-5
           >
             {table.reservation_id ? "Occupied" : "Free"}
           </div>

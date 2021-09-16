@@ -35,7 +35,7 @@ function ReservationSeat() {
       <h1>Seat</h1>
       <form onSubmit={submitHandler}>
         <fieldset>
-          <div className="row">
+          <div className="row ">
             <div className="col">
               <select id="table_id" name="table_id" value={tableId} required={true} onChange={changeHandler}>
                 <option value="">Table</option>
