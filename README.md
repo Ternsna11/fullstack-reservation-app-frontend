@@ -105,6 +105,10 @@ Then fill in your .env file with your backend URL.
 // front-end .env example -> Connects to server
 // REACT_APP_API_BASE_URL=http://localhost:5000
 ```
+## Testing
 
 Make sure to grab the backend from  
  [Restaurant Reservation System Backend](https://github.com/Ternsna11/fullstack-reservation-app-backend)
+ 
+The front-end and back-end repos need to be in the same directory allowing the front-end to be able to reference the back-end for
+testing purposes.
