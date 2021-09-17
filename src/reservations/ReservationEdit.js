@@ -26,7 +26,7 @@ function ReservationEdit(){
         .catch(setError);
     }, [reservation_id]);
 
-    // Similar to Form index.js from flashcards project:
+   
     const [reservation, setReservation] = useState(initialState);
     function changeHandler({ target: { name, value } }) {
       setReservation((prevState) => ({
