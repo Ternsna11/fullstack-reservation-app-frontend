@@ -1,10 +1,15 @@
-import React from "react";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { createReservation } from "../utils/api";
+import { React, useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import {
+  createReservation,
+  readReservation,
+  updateReservation,
+} from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 function ReservationForm() {
   const history = useHistory();
+  const params = useParams();
+  const resId = params.reservation_id;
   const initialState = {
     first_name: "",
     last_name: "",
@@ -14,30 +19,50 @@ function ReservationForm() {
     people: 0,
   };
   const [reservation, setReservation] = useState(initialState);
+  const [formError, setFormError] = useState(null);
   function changeHandler({ target: { name, value } }) {
+    if (name === "people") {
+      value = Number(value);
+    }
     setReservation((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   }
-  function changeHandlerNum({ target: { name, value } }) {
-    setReservation((prevState) => ({
-      ...prevState,
-      [name]: Number(value),
-    }));
-  }
-  const [formError, setFormError] = useState(null);
-  function submitHandler(event) {
+  useEffect(() => {
+    async function loadReservation() {
+      const abortController = new AbortController();
+      setFormError(null);
+      try {
+        if (resId) {
+          const originalReservation = await readReservation(
+            resId,
+            abortController.signal
+          );
+          setReservation(originalReservation);
+        }
+      } catch (error) {
+        setFormError(error);
+      }
+      return () => abortController.abort();
+    }
+    loadReservation();
+  }, [resId]);
+  async function submitHandler(event) {
     event.preventDefault();
     event.stopPropagation();
     setFormError(null);
-    createReservation(reservation)
-      .then((createdReservation) => {
-        const res_date =
-          createdReservation.reservation_date.match(/\d{4}-\d{2}-\d{2}/)[0];
-        history.push(`/dashboard?date=` + res_date);
-      })
-      .catch(setFormError);
+    try {
+      if (resId) {
+        await updateReservation(reservation);
+        history.push(`/dashboard?date=${reservation.reservation_date}`);
+      } else {
+        await createReservation(reservation);
+        history.push(`/dashboard?date=${reservation.reservation_date}`);
+      }
+    } catch (error) {
+      setFormError(error);
+    }
   }
   return (
     <main>
@@ -104,7 +129,7 @@ function ReservationForm() {
               type="number"
               min={1}
               value={reservation.people}
-              onChange={changeHandlerNum}
+              onChange={changeHandler}
             />
           </div>
         </div>
