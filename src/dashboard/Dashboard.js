@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { listReservations, listTables, finishTable } from '../utils/api';
-import ErrorAlert from '../layout/ErrorAlert';
-import Reservations from './Reservations';
-import Tables from './Tables';
-import { today, next, previous, formatDate } from '../utils/date-time';
-import { useLocation } from 'react-router';
+import React, { useEffect, useState } from "react";
+import { listReservations, listTables, finishTable } from "../utils/api";
+import ErrorAlert from "../layout/ErrorAlert";
+import Reservations from "./Reservations";
+import Tables from "./Tables";
+import { today, next, previous, formatDate } from "../utils/date-time";
+import { useLocation } from "react-router";
 function Dashboard() {
   function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -13,18 +13,18 @@ function Dashboard() {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
-  const [date, setDate] = useState(query.get('date') || today());
+  const [date, setDate] = useState(query.get("date") || today());
   useEffect(loadDashboard, [date]);
   const handleDateChange = (event) => {
     setDate(event.target.value);
   };
   function loadDashboard() {
-    const abortController = new window.AbortController();
+    const abortController = new AbortController();
     setReservationsError(null);
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
-    listTables().then(setTables);
+    listTables(abortController.signal).then(setTables);
     return () => abortController.abort();
   }
   function onFinish(table_id, reservation_id) {
