@@ -1,17 +1,21 @@
-import React from "react";
+import { React } from "react";
 import { Link } from "react-router-dom";
-
-function Reservations({ onCancel, reservations = [] }) {
-  function cancelHandler({
-    target: { dataset: { reservationIdCancel } } = {},
-  }) {
+import { cancelReservation } from "../utils/api";
+function Reservations({ reservations = [] }) {
+  async function cancelHandler(reservationId) {
     if (
-      reservationIdCancel &&
       window.confirm(
         "Do you want to cancel this reservation? This cannot be undone."
       )
     ) {
-      onCancel(reservationIdCancel);
+      const abortController = new AbortController();
+      try {
+        await cancelReservation(reservationId);
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+      }
+      return () => abortController.abort();
     }
   }
   const rows = reservations.length ? (
@@ -51,7 +55,7 @@ function Reservations({ onCancel, reservations = [] }) {
                 type="button"
                 className="btn btn-danger m-1"
                 data-reservation-id-cancel={reservation.reservation_id}
-                onClick={cancelHandler}
+                onClick={() => cancelHandler(reservation.reservation_id)}
               >
                 Cancel
               </button>
@@ -71,5 +75,4 @@ function Reservations({ onCancel, reservations = [] }) {
     </div>
   );
 }
-
 export default Reservations;
