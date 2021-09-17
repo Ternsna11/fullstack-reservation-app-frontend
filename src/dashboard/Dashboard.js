@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
-import {
-  listReservations,
-  listTables,
-  finishTable,
-  cancelReservation,
-} from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
-import Reservations from "./Reservations";
-import Tables from "./Tables";
-import { today, next, previous, formatDate } from "../utils/date-time";
-import { useLocation } from "react-router";
-
+import React, { useEffect, useState } from 'react';
+import { listReservations, listTables, finishTable } from '../utils/api';
+import ErrorAlert from '../layout/ErrorAlert';
+import Reservations from './Reservations';
+import Tables from './Tables';
+import { today, next, previous, formatDate } from '../utils/date-time';
+import { useLocation } from 'react-router';
 function Dashboard() {
   function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -19,34 +13,23 @@ function Dashboard() {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
-  const [date, setDate] = useState(query.get("date") || today());
+  const [date, setDate] = useState(query.get('date') || today());
   useEffect(loadDashboard, [date]);
-
   const handleDateChange = (event) => {
     setDate(event.target.value);
   };
-
   function loadDashboard() {
     const abortController = new window.AbortController();
     setReservationsError(null);
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
-
     listTables().then(setTables);
     return () => abortController.abort();
   }
-
-  function onCancel(reservation_id) {
-    cancelReservation(reservation_id)
-      .then(loadDashboard)
-      .catch(setReservationsError);
-  }
-
   function onFinish(table_id, reservation_id) {
     finishTable(table_id, reservation_id).then(loadDashboard);
   }
-
   return (
     <main>
       <div className="Dashboard-Dates text-center">
@@ -86,7 +69,7 @@ function Dashboard() {
       </div>
       <ErrorAlert error={reservationsError} />
       <div>
-        <Reservations reservations={reservations} onCancel={onCancel} />
+        <Reservations reservations={reservations} />
       </div>
       <div className="mb-3 text-center">
         <h4 className="mb-0">TABLES</h4>
@@ -97,5 +80,4 @@ function Dashboard() {
     </main>
   );
 }
-
 export default Dashboard;
