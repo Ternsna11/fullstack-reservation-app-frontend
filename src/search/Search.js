@@ -19,9 +19,11 @@ function Search() {
 
   function search() {
     setShowResults(false);
-    listReservations({ mobile_number: mobileNumber })
+    const abortController = new AbortController();
+    listReservations({ mobile_number: mobileNumber }, abortController.signal)
       .then(setReservations)
       .then(() => setShowResults(true));
+    return () => abortController.abort();
   }
 
   return (
@@ -50,10 +52,14 @@ function Search() {
         </form>
       </div>
 
-      {showResults && <Reservations reservations={reservations} className=" d-flex justify-content-center flex-wrap mb-5" />}
+      {showResults && (
+        <Reservations
+          reservations={reservations}
+          className=" d-flex justify-content-center flex-wrap mb-5"
+        />
+      )}
     </>
   );
 }
 
 export default Search;
-
