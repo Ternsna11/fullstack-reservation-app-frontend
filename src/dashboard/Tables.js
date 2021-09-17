@@ -28,7 +28,6 @@ function Tables({ onFinish, tables = [] }) {
           <div
             className=" btn btn-outline-success  mb-2"
             data-table-id-status={table.table_id}
-            mb-5
           >
             {table.reservation_id ? "Occupied" : "Free"}
           </div>
